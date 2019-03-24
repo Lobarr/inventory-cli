@@ -1,0 +1,62 @@
+Inventory DB
+
+invoice
+- name
+- email
+- Id 
+- date
+- amount 
+
+product 
+- id
+- photo
+- name
+- brand
+- stock
+- price
+
+category 
+- id 
+- name 
+
+brand 
+- id
+- name
+
+supplier 
+- id
+- name 
+- email
+
+supplies 
+- supplier_id
+- product_id
+
+product_category
+- product_id
+- category_id
+
+brand_category
+- brand_id
+- category_id
+
+product_brand
+- brand_id
+- product_id
+
+buyer_invoice
+- invoice_id
+- product_id
+
+supplier_category
+- supplier_id
+- category_id
+
+order 
+- supplier_id
+- stock
+- product_id
+- amount
+
+
+
