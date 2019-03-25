@@ -1,0 +1,14 @@
+DROP TABLE Invoice;
+DROP TABLE Product;
+DROP TABLE Category;
+DROP TABLE Brand;
+DROP TABLE Supplier;
+DROP TABLE Shipping;
+DROP TABLE supplies;
+DROP TABLE product_category;
+DROP TABLE brand_category;
+DROP TABLE product_brand;
+DROP TABLE customer_invoice;
+DROP TABLE supplier_category;
+DROP TABLE product_order;
+DROP TABLE customer_shipment;

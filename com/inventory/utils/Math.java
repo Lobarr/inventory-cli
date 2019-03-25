@@ -1,5 +1,6 @@
+package com.inventory.utils;
 
-class Math {
+public class Math {
   public static int add(int a, int b) {
     return a + b;
   }

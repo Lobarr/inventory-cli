@@ -28,6 +28,10 @@ supplier
 - name 
 - email
 
+shipping 
+- id
+- address
+
 supplies 
 - supplier_id
 - product_id
@@ -44,7 +48,7 @@ product_brand
 - brand_id
 - product_id
 
-buyer_invoice
+customer_invoice
 - invoice_id
 - product_id
 
@@ -52,11 +56,14 @@ supplier_category
 - supplier_id
 - category_id
 
-order 
+product_order 
 - supplier_id
-- stock
 - product_id
-- amount
+- stock
+
+customer_shipment
+- shipping_id
+- invoice_id
 
 
 
