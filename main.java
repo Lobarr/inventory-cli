@@ -1,9 +1,14 @@
-import com.inventory.utils.Math;;
+import com.inventory.utils.DB;
 
 class Main {
   public static void main(String args[]) {
-    System.out.println(Math.add(4,4));
-    System.out.println(Math.sub(5,3));
-    System.out.println("testing tsting testing u digggg");
+    var db = new DB();
+    try {
+      
+    } catch(Exception e) {
+      System.out.println(e.getMessage());
+    } finally {
+      db.close();
+    }
   }
 }

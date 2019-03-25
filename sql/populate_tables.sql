@@ -21,7 +21,6 @@ VALUES (
 );
 
 -- Product 
-
 INSERT INTO Product (
   [id], [name], [stock], [price] 
 )
@@ -45,7 +44,6 @@ VALUES (
 
 
 -- Category
-
 INSERT INTO Category (
   [id], [name]
 )
@@ -91,7 +89,6 @@ VALUES (
 );
 
 -- Supplier 
-
 INSERT INTO Supplier (
   [id], [name], [email]
 ) 
@@ -114,7 +111,6 @@ VALUES (
 );
 
 -- Shipping
-
 INSERT INTO Shipping (
   [id], [address]
 )
@@ -137,7 +133,6 @@ VALUES (
 );
 
 -- supplies
-
 INSERT INTO supplies (
   [supplier_id], [product_id]
 ) 
@@ -160,7 +155,6 @@ VALUES (
 );
 
 -- product_category 
-
 INSERT INTO product_category (
   [product_id], [category_id]
 )
@@ -228,7 +222,6 @@ VALUES (
 );
 
 -- customer_invoice
-
 INSERT INTO customer_invoice (
   [product_id], [invoice_id]
 )
@@ -251,7 +244,6 @@ VALUES (
 );
 
 -- supplier_category
-
 INSERT INTO supplier_category (
   [supplier_id], [category_id]
 ) 

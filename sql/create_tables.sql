@@ -1,5 +1,4 @@
 -- Tables 
-
 CREATE TABLE Invoice (
   id VARCHAR NOT NULL,
   name VARCHAR NOT NULL,
@@ -43,7 +42,6 @@ CREATE TABLE Shipping (
 );
 
 -- Relationships
-
 CREATE TABLE supplies (
   supplier_id VARCHAR NOT NULL,
   product_Id VARCHAR NOT NULL,
@@ -70,6 +68,7 @@ CREATE TABLE product_brand (
   brand_id VARCHAR NOT NULL,
   FOREIGN KEY(product_id) REFERENCES Product(product_id),
   FOREIGN KEY(brand_id) REFERENCES Category(brand_id)
+  
 );
 
 CREATE TABLE customer_invoice (
