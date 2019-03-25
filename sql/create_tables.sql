@@ -3,7 +3,7 @@ CREATE TABLE Invoice (
   id VARCHAR NOT NULL,
   name VARCHAR NOT NULL,
   email VARCHAR NOT NULL,
-  date VARCHAR NOT NULL,
+  timestamp FLOAT NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -11,7 +11,7 @@ CREATE TABLE Product (
   id VARCHAR NOT NULL,
   name VARCHAR NOT NULL,
   stock INT NOT NULL,
-  price DOUBLE NOT NULL,
+  price FLOAT NOT NULL,
   PRIMARY KEY (id)
 );
 
