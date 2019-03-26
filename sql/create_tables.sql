@@ -3,7 +3,7 @@ CREATE TABLE Invoice (
   id VARCHAR NOT NULL,
   name VARCHAR NOT NULL,
   email VARCHAR NOT NULL,
-  timestamp FLOAT NOT NULL,
+  timestamp INT NOT NULL,
   PRIMARY KEY (id)
 );
 

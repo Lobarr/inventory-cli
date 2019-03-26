@@ -3,7 +3,6 @@ package com.inventory.lib;
 import com.inventory.lib.Invoice;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -72,7 +71,7 @@ public class InvoiceActions {
       stmt.executeUpdate();
       System.out.println("Deleted invoice - " + id);
     } catch (Exception e) {
-      System.out.println("Error: Unable to update invoice");
+      System.out.println("Error: Unable to remove invoice");
       System.out.println("Reason: " + e.getMessage());    }
   }
 

@@ -1,6 +1,5 @@
 package com.inventory.lib;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 public class Invoice {
