@@ -1,31 +1,42 @@
 package com.inventory.lib;
 
-import com.inventory.utils.DB;
 import java.sql.Connection;
+import java.util.UUID;
 
-public class Invoice implements DB {
-  private int id;
+public class Invoice {
+  private String id;
   private String name;
   private String email;
   private float timestamp;
 
-  Invoice(int id, String name, String email, float timestamp) {
+  public Invoice() {
+  }
+  
+  public Invoice(String id, String name, String email, float timestamp) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.timestamp = timestamp;
   }
 
-  public int getId() {
-    return id;
+  public Invoice (String name, String email, float timestamp) {
+    UUID id = UUID.randomUUID();
+    this.id = id.toString();
+    this.name = name;
+    this.email = email;
+    this.timestamp = timestamp;
   }
 
-  public void setId(int id) {
+  public String getId() {
+    return this.id;
+  }
+
+  public void setId(String id) {
     this.id = id;
   }
 
   public String getName() {
-    return name;
+    return this.name;
   }
 
   public void setName(String name) {
@@ -33,7 +44,7 @@ public class Invoice implements DB {
   }
 
   public String getEmail() {
-    return email;
+    return this.email;
   }
 
   public void setEmail(String email) {
@@ -41,15 +52,17 @@ public class Invoice implements DB {
   }
 
   public float getTimestamp() {
-    return timestamp;
+    return this.timestamp;
   }
 
   public void setTimestamp(float timestamp) {
     this.timestamp = timestamp;
   }
 
-  public static Invoice get(String id) {
-
+  public void print() {
+    System.out.println("ID: " + this.getId());
+    System.out.println("Name: " + this.getName());
+    System.out.println("Email: " + this.getEmail());
+    System.out.println("Timestamp: " + this.getTimestamp());
   }
-
 }

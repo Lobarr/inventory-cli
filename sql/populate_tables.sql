@@ -1,20 +1,20 @@
 -- Invoice
 INSERT INTO Invoice (
-  [id], [name], [email], [date]
+  [id], [name], [email], [timestamp]
 )
 VALUES (
   'ea47e732-2133-4252-b230-6070ae7054be', 'Boyd Heller', 'Bradly74@gmail.com', 1553472948
 );
 
 INSERT INTO Invoice (
-  [id], [name], [email], [date]
+  [id], [name], [email], [timestamp]
 )
 VALUES (
   '76759e93-9d98-4ed6-9bf2-d4657ace99aa', 'Heidi Funk', 'Lamar_Dare10@yahoo.com', 1353472948
 );
 
 INSERT INTO Invoice (
-  [id], [name], [email], [date]
+  [id], [name], [email], [timestamp]
 )
 VALUES (
   '26c3f5db-a0ef-451a-b48f-5c45b9d6143a', 'Shanel Gleichner', 'Jennyfer_Wisoky@gmail.com', 1553432948
