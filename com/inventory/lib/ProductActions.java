@@ -13,7 +13,7 @@ public class ProductActions {
       String query = "INSERT INTO Product (id, name, stock, price) VALUES (?,?,?,?)";
 
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, prod.getId();
+      stmt.setString(1, prod.getId());
       stmt.setString(2, prod.getName());
       stmt.setInt(3, prod.getStock());
       stmt.setFloat(4, prod.getPrice());

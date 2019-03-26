@@ -1,8 +1,5 @@
 import com.inventory.utils.DB;
-
-import java.util.UUID;
 import java.util.ArrayList;
-
 import com.inventory.lib.Invoice;
 import com.inventory.lib.InvoiceActions;
 

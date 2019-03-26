@@ -11,80 +11,83 @@ import java.sql.PreparedStatement;
 public class SupplierActions {
   public static void createSupplier(Connection conn, Supplier su) {
     try {
-      String query = "INSERT INTO Supplier (id, name, email) VALUES (?,?)";
+      String query = "INSERT INTO Supplier (id, name, email) VALUES (?,?, ?)";
 
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, br.getId());
-      stmt.setString(2, br.getName());
+      stmt.setString(1, su.getId());
+      stmt.setString(2, su.getName());
+      stmt.setString(3, su.getEmail());
       stmt.executeUpdate();
-      System.out.println("Created brand " + br.getId());
+      System.out.println("Created supplier " + su.getId());
     } catch (Exception e) {
-      System.out.println("Error: Unable to create brand");
+      System.out.println("Error: Unable to create supplier");
       System.out.println("Reason: " + e.getMessage());
     }
   }
   
 
-  public static Brand getBrand(Connection conn, String id) {
+  public static Supplier getSupplier(Connection conn, String id) {
     try {
       String query = "SELECT * "
-        + "FROM Brand "
+        + "FROM Supplier "
         + "WHERE id = ? ";
 
       PreparedStatement stmt = conn.prepareStatement(query);
       stmt.setString(1, id);
       ResultSet rs = stmt.executeQuery();
-      return new Brand(rs.getString("id"), rs.getString("name"));
+      return new Supplier(rs.getString("id"), rs.getString("name"), rs.getString("email"));
     } catch (Exception e) {
-      System.out.println("Error: Unable to get brand");
+      System.out.println("Error: Unable to get supplier");
       System.out.println("Reason: " + e.getMessage());
     }
     return null;
   }
 
-  public static void updateBrand(Connection conn, Brand br) {
+  public static void updateSupplier(Connection conn, Supplier su) {
     try {
-      String query = "UPDATE Brand "
-        + "SET name = ? "
+      String query = "UPDATE Supplier "
+        + "SET name = ?, email = ? "
         + "WHERE id = ? ";
 
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, br.getName());
-      stmt.setString(2, br.getId());
+      stmt.setString(1, su.getName());
+      stmt.setString(2, su.getEmail());
+      stmt.setString(3, su.getId());
       stmt.executeUpdate();
-      System.out.println("Updated brand " + br.getId());
+      System.out.println("Updated supplier " + su.getId());
     } catch (Exception e) {
-      System.out.println("Error: Unable to update brand");
+      System.out.println("Error: Unable to update supplier");
       System.out.println("Reason: " + e.getMessage());
     }
   }
 
-  public static void removeBrand(Connection conn, String id) {
+  public static void removeSupplier(Connection conn, String id) {
     try {
-      String query = "DELETE FROM Brand WHERE id = ?";
+      String query = "DELETE FROM Supplier WHERE id = ?";
 
       PreparedStatement stmt = conn.prepareStatement(query);
       stmt.setString(1, id);
       stmt.executeUpdate();
-      System.out.println("Deleted brand - " + id);
+      System.out.println("Deleted supplier - " + id);
     } catch (Exception e) {
-      System.out.println("Error: Unable to remove brand");
-      System.out.println("Reason: " + e.getMessage());    }
+      System.out.println("Error: Unable to remove supplier");
+      System.out.println("Reason: " + e.getMessage());    
+    }
   }
 
-  public static ArrayList<Brand> getAll(Connection conn) {
+  public static ArrayList<Supplier> getAll(Connection conn) {
     try {
-      String query = "SELECT * FROM Brand";
+      String query = "SELECT * FROM Supplier";
 
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
-      ArrayList<Brand> res = new ArrayList<Brand>();
+      ArrayList<Supplier> res = new ArrayList<Supplier>();
       while(rs.next()) {
-        res.add(new Brand(rs.getString("id"), rs.getString("name")));
+        res.add(new Supplier(rs.getString("id"), rs.getString("name"), rs.getString("email")));
       }
       return res;
     } catch(Exception e) {
-      System.out.println("Error: Unable to get brands");
+      System.out.println("Error: Unable to get suppliers");
       System.out.println("Reason: " + e.getMessage());    
     }
     return null;
