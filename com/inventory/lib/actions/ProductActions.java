@@ -1,11 +1,11 @@
-package com.inventory.lib;
+package com.inventory.lib.actions;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import com.inventory.lib.Product;
+import com.inventory.lib.schemas.Product;
 
 public class ProductActions {
   public static void createProduct(Connection conn, Product prod) {

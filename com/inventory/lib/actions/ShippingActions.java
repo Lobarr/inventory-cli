@@ -1,6 +1,6 @@
-package com.inventory.lib;
+package com.inventory.lib.actions;
 
-import com.inventory.lib.Shipping;
+import com.inventory.lib.schemas.Shipping;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -23,7 +23,6 @@ public class ShippingActions {
       System.out.println("Reason: " + e.getMessage());
     }
   }
-  
 
   public static Shipping getShipping(Connection conn, String id) {
     try {

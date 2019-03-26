@@ -1,7 +1,7 @@
 import com.inventory.utils.DB;
 import java.util.ArrayList;
-import com.inventory.lib.Invoice;
-import com.inventory.lib.InvoiceActions;
+import com.inventory.lib.schemas.Invoice;
+import com.inventory.lib.actions.InvoiceActions;
 
 class Main {
   public static void main(String args[]) {

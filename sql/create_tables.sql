@@ -42,50 +42,49 @@ CREATE TABLE Shipping (
 );
 
 -- Relationships
-CREATE TABLE supplies (
+CREATE TABLE Supplies (
   supplier_id VARCHAR NOT NULL,
-  product_Id VARCHAR NOT NULL,
+  product_id VARCHAR NOT NULL,
   FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
   FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
 
-CREATE TABLE product_category (
+CREATE TABLE ProductCategory (
   product_id VARCHAR NOT NULL,
   category_id VARCHAR NOT NULL,
   FOREIGN KEY(product_id) REFERENCES Product(product_id),
   FOREIGN KEY(category_id) REFERENCES Category(category_id)
 );
 
-CREATE TABLE brand_category (
+CREATE TABLE BrandCategory (
   brand_id VARCHAR NOT NULL,
   category_id VARCHAR NOT NULL,
   FOREIGN KEY(brand_id) REFERENCES Product(brand_id),
   FOREIGN KEY(category_id) REFERENCES Category(category_id)
 );
 
-CREATE TABLE product_brand (
+CREATE TABLE ProductBrand (
   product_id VARCHAR NOT NULL,
   brand_id VARCHAR NOT NULL,
   FOREIGN KEY(product_id) REFERENCES Product(product_id),
   FOREIGN KEY(brand_id) REFERENCES Category(brand_id)
-  
 );
 
-CREATE TABLE customer_invoice (
+CREATE TABLE CustomerInvoice (
   product_id VARCHAR NOT NULL,
   invoice_id VARCHAR NOT NULL,
   FOREIGN KEY(product_id) REFERENCES Product(product_id),
   FOREIGN KEY(invoice_id) REFERENCES Category(invoice_id)
 );
 
-CREATE TABLE supplier_category (
+CREATE TABLE SupplierCategory (
   supplier_id VARCHAR NOT NULL,
   category_id VARCHAR NOT NULL,
   FOREIGN KEY(supplier_id) REFERENCES Product(supplier_id),
   FOREIGN KEY(category_id) REFERENCES Category(category_id)
 );
 
-CREATE TABLE product_order (
+CREATE TABLE ProductOrder (
   product_id VARCHAR NOT NULL,
   supplier_id VARCHAR NOT NULL,
   stock INT NOT NULL,
@@ -93,7 +92,7 @@ CREATE TABLE product_order (
   FOREIGN KEY(supplier_id) REFERENCES Supplier(supplier_id)
 );
 
-CREATE TABLE customer_shipment (
+CREATE TABLE CustomerShipment (
   invoice_id VARCHAR NOT NULL,
   shipping_id VARChAR NOT NULL,
   FOREIGN KEY(invoice_id) REFERENCES Invoice(invoice_id),

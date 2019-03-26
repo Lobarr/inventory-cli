@@ -1,4 +1,4 @@
-package com.inventory.lib;
+package com.inventory.lib.schemas;
 
 import java.util.UUID;
 

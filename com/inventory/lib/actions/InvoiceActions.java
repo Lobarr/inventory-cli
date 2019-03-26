@@ -1,6 +1,6 @@
-package com.inventory.lib;
+package com.inventory.lib.actions;
 
-import com.inventory.lib.Invoice;
+import com.inventory.lib.schemas.Invoice;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;

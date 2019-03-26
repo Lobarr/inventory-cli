@@ -8,7 +8,7 @@ WHERE Product.stock > 10;
 
 SELECT Supplier.name, Supplier.email
 FROM Supplier
-JOIN supplies ON Supplier.id=supplies.supplier_id
+JOIN Supplies ON Supplier.id=Supplies.supplier_id
 JOIN Product ON supplies.product_id=Product.id
 ORDER BY Product.stock DESC
 LIMIT 1;
@@ -23,9 +23,9 @@ LIMIT 1;
 
 -- most sold product
 
-SELECT *, COUNT(customer_invoice.product_id) as bought_count
-FROM customer_invoice
-GROUP BY customer_invoice.product_id
+SELECT *, COUNT(CustomerInvoice.product_id) as bought_count
+FROM CustomerInvoice
+GROUP BY CustomerInvoice.product_id
 ORDER BY bought_count DESC
 LIMIT 1;
 
