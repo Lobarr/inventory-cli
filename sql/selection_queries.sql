@@ -34,3 +34,9 @@ LIMIT 1;
 SELECT *
 FROM Product
 ORDER BY Product.price ASC;
+
+-- products in an invoice
+SELECT Product.id, Product.name, Product.stock, Product.price
+FROM CustomerInvoice
+JOIN Product ON CustomerInvoice.product_id = Product.id
+WHERE CustomerInvoice.invoice_id = '26c3f5db-a0ef-451a-b48f-5c45b9d6143a';
