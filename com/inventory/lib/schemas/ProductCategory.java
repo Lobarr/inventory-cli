@@ -1,4 +1,4 @@
-package com.inventory.lib.schemas.relationships;
+package com.inventory.lib.schemas;
 
 import com.inventory.lib.schemas.Category;
 import com.inventory.lib.schemas.Product;
