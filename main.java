@@ -1,8 +1,12 @@
-import com.inventory.utils.DB;
+import com.inventory.lib.utils.DB;
 import java.util.ArrayList;
 import com.inventory.lib.schemas.Invoice;
-import com.inventory.lib.actions.InvoiceActions;
 
+enum test {
+  A,
+  B,
+  C
+}
 class Main {
   public static void main(String args[]) {
     var db = new DB();
@@ -17,11 +21,12 @@ class Main {
 
       // Invoice test = new Invoice("test", "test", 31234234234f);
       
-      ArrayList<Invoice> invoices = InvoiceActions.getAll(db.connection());
+      ArrayList<Invoice> invoices = Invoice.getAll(db.connection());
       for (Invoice invoice : invoices) {
         invoice.print();
         System.out.println("\n");
       }
+      System.out.println(test.A);
     } catch(Exception e) {
       System.out.println(e.getMessage());
     } finally {
