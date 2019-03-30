@@ -1,4 +1,4 @@
-package com.inventory.lib.schemas;
+package com.inventory.lib;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.util.UUID;
 
-public class Category {
+public class Brand {
   private String id;
   private String name;
 
-  public Category() {}
+  public Brand() {}
 
-  public Category(String id, String name) {
+  public Brand(String id, String name) {
     this.id = id;
     this.name = name;
   }
 
-  public Category(String name) {
+  public Brand(String name) {
     UUID id = UUID.randomUUID();
     this.id = id.toString();
     this.name = name;
@@ -31,6 +31,7 @@ public class Category {
   public void setId(String id) {
     this.id = id;
   }
+  
   public String getName() {
     return name;
   }
@@ -39,82 +40,82 @@ public class Category {
     this.name = name;
   }
 
-  public static void createCategory(Connection conn, Category cat) {
+  public static void createCategory(Connection conn, Brand br) {
     try {
-      String query = "INSERT INTO Category (id, name) VALUES (?,?)";
+      String query = "INSERT INTO Brand (id, name) VALUES (?,?)";
 
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, cat.getId());
-      stmt.setString(2, cat.getName());
+      stmt.setString(1, br.getId());
+      stmt.setString(2, br.getName());
       stmt.executeUpdate();
-      System.out.println("Created category " + cat.getId());
+      System.out.println("Created brand " + br.getId());
     } catch (Exception e) {
-      System.out.println("Error: Unable to create category");
+      System.out.println("Error: Unable to create brand");
       System.out.println("Reason: " + e.getMessage());
     }
   }
   
 
-  public static Category getCategory(Connection conn, String id) {
+  public static Brand getBrand(Connection conn, String id) {
     try {
       String query = "SELECT * "
-        + "FROM Category "
+        + "FROM Brand "
         + "WHERE id = ? ";
 
       PreparedStatement stmt = conn.prepareStatement(query);
       stmt.setString(1, id);
       ResultSet rs = stmt.executeQuery();
-      return new Category(rs.getString("id"), rs.getString("name"));
+      return new Brand(rs.getString("id"), rs.getString("name"));
     } catch (Exception e) {
-      System.out.println("Error: Unable to get category");
+      System.out.println("Error: Unable to get brand");
       System.out.println("Reason: " + e.getMessage());
     }
     return null;
   }
 
-  public static void updateCategory(Connection conn, Category cat) {
+  public static void updateBrand(Connection conn, Brand br) {
     try {
-      String query = "UPDATE Category "
+      String query = "UPDATE Brand "
         + "SET name = ? "
         + "WHERE id = ? ";
 
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, cat.getName());
-      stmt.setString(2, cat.getId());
+      stmt.setString(1, br.getName());
+      stmt.setString(2, br.getId());
       stmt.executeUpdate();
-      System.out.println("Updated category " + cat.getId());
+      System.out.println("Updated brand " + br.getId());
     } catch (Exception e) {
-      System.out.println("Error: Unable to update category");
+      System.out.println("Error: Unable to update brand");
       System.out.println("Reason: " + e.getMessage());
     }
   }
 
-  public static void removeCategory(Connection conn, String id) {
+  public static void removeBrand(Connection conn, String id) {
     try {
-      String query = "DELETE FROM Category WHERE id = ?";
+      String query = "DELETE FROM Brand WHERE id = ?";
 
       PreparedStatement stmt = conn.prepareStatement(query);
       stmt.setString(1, id);
       stmt.executeUpdate();
-      System.out.println("Deleted category - " + id);
+      System.out.println("Removed brand - " + id);
     } catch (Exception e) {
-      System.out.println("Error: Unable to remove category");
+      System.out.println("Error: Unable to remove brand");
       System.out.println("Reason: " + e.getMessage());    }
   }
 
-  public static ArrayList<Category> getAll(Connection conn) {
+  public static ArrayList<Brand> getAll(Connection conn) {
     try {
-      String query = "SELECT * FROM Category";
+      String query = "SELECT * FROM Brand";
 
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
-      ArrayList<Category> res = new ArrayList<Category>();
+      ArrayList<Brand> res = new ArrayList<Brand>();
       while(rs.next()) {
-        res.add(new Category(rs.getString("id"), rs.getString("name")));
+        res.add(new Brand(rs.getString("id"), rs.getString("name")));
       }
       return res;
     } catch(Exception e) {
-      System.out.println("Error: Unable to get categories");
+      System.out.println("Error: Unable to get brands");
       System.out.println("Reason: " + e.getMessage());    
     }
     return null;

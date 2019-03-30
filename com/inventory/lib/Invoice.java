@@ -1,4 +1,4 @@
-package com.inventory.lib.schemas;
+package com.inventory.lib;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

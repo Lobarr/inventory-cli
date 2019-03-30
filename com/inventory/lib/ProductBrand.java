@@ -1,6 +1,6 @@
-package com.inventory.lib.schemas;
+package com.inventory.lib;
 
-import com.inventory.lib.schemas.Product;
+import com.inventory.lib.Product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

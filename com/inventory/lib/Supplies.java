@@ -1,10 +1,23 @@
-package com.inventory.lib.schemas;
+package com.inventory.lib;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
+
+// public enum SuppliesOptions {
+//   CREATE,
+//   GET,
+//   REMOVE
+// }
+
+// public enum SuppliesGetOptions {
+//   ALL,
+//   BYSUPPLIER,
+//   BYPRODUCT,
+// }
 
 public class Supplies {
   private String supplier_id;
@@ -45,7 +58,6 @@ public class Supplies {
       System.out.println("Reason: " + e.getMessage());
     }
   }
-  
 
   public static ArrayList<Supplies> getSuppliesBySupplier(Connection conn, String supplier_id) {
     try {
@@ -121,4 +133,22 @@ public class Supplies {
     }
     return null;
   }
+
+  // public static void menu() {
+  //   System.out.println("*** Supplies Menu *** \n");
+  //   System.out.println("- Type input");
+  //   System.out.println("1. CREATE");
+  //   System.out.println("2. GET");
+  //   System.out.println("3. REMOVE");
+
+  //   Scanner scanner = new Scanner(System.in);
+  //   System.out.println("> ");
+
+  //   int option = scanner.nextInt();
+  //   switch (option) {
+  //     case 1:
+
+  //       break;
+  //   }
+  // }
 }

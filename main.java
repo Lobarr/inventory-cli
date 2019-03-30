@@ -1,6 +1,6 @@
 import com.inventory.lib.utils.DB;
 import java.util.ArrayList;
-import com.inventory.lib.schemas.Invoice;
+import com.inventory.lib.Invoice;
 
 enum test {
   A,
