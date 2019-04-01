@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 
 public class SupplierCategory {
@@ -31,6 +32,17 @@ public class SupplierCategory {
     this.category_id = category_id;
   }  
 
+  public void print() {
+    System.out.println("Supplier ID:\t" + this.getSupplier_id());
+    System.out.println("Category ID:\t" + this.getCategory_id());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<SupplierCategory> sc) {
+    System.out.println("*** SupplierCategories ***");
+    sc.forEach(s -> s.print());
+  }
+
   public static void createSupplierCategory(Connection conn, SupplierCategory sc) {
     try {
       String query = "INSERT INTO SupplierCategory (supplier_id, category_id) VALUES (?,?)";
@@ -47,7 +59,7 @@ public class SupplierCategory {
   }
   
 
-  public static ArrayList<SupplierCategory> getSuppliercCagetoryBySupplier(Connection conn, String supplier_id) {
+  public static ArrayList<SupplierCategory> getSupplierCagetoryBySupplier(Connection conn, String supplier_id) {
     try {
       String query = "SELECT * "
         + "FROM SupplierCategory "
@@ -68,7 +80,7 @@ public class SupplierCategory {
     return null;
   }
 
-  public static ArrayList<SupplierCategory> getSuppliercCagetoryByCategory(Connection conn, String category_id) {
+  public static ArrayList<SupplierCategory> getSupplierCagetoryByCategory(Connection conn, String category_id) {
     try {
       String query = "SELECT * "
         + "FROM ProductOrder "
@@ -91,7 +103,7 @@ public class SupplierCategory {
 
   public static void removeSupplierCategory(Connection conn, SupplierCategory sc) {
     try {
-      String query = "DELETE FROM SupplierCategory WHERE category_id = ?, supplier_id = ?";
+      String query = "DELETE FROM SupplierCategory WHERE category_id = ? and supplier_id = ?";
 
       PreparedStatement stmt = conn.prepareStatement(query);
       stmt.setString(1, sc.getCategory_id());
@@ -120,5 +132,114 @@ public class SupplierCategory {
       System.out.println("Reason: " + e.getMessage());    
     }
     return null;
+  }
+
+  public static void menu(Connection conn) {
+    System.out.println("*** SupplierCategory Menu ***");
+    System.out.println("1 - CREATE");
+    System.out.println("2 - GET");
+    System.out.println("3 - REMOVE");
+    System.out.println("8 - BACK\n");
+
+    
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("> ");
+
+    int option = scanner.nextInt();
+    switch (option) {
+      case 1:
+        SupplierCategory.createMenu(conn);
+        SupplierCategory.menu(conn);
+        break;
+      case 2:
+        SupplierCategory.getMenu(conn);
+        SupplierCategory.menu(conn);
+        break;
+      case 3:
+        SupplierCategory.removeMenu(conn);
+        SupplierCategory.menu(conn);
+      case 8:
+        break;
+      default: 
+        SupplierCategory.menu(conn);
+        break;
+    }
+  }
+
+  public static void createMenu(Connection conn) {
+    String supplier_id;
+    String category_id;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Supplier ID");
+    System.out.print("> ");
+    supplier_id = scanner.next();
+
+    System.out.println("Category ID");
+    System.out.print("> ");
+    category_id = scanner.next();
+
+    SupplierCategory input = new SupplierCategory(supplier_id, category_id);
+    SupplierCategory.createSupplierCategory(conn, input);
+  }
+
+  public static void getMenu(Connection conn) {
+    System.out.println("*** Get SupplierCategory ***");
+    System.out.println("1 - BY SUPPLIER");
+    System.out.println("2 - BY CATEGORY");
+    System.out.println("3 - ALL");
+    System.out.println("8 - BACK");
+
+    int option;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.print(">");
+    option = scanner.nextInt();
+
+    switch(option){
+      case 1:
+        String supplier;
+        System.out.print("> ");
+        supplier = scanner.next();
+        ArrayList<SupplierCategory> sc_supplier = SupplierCategory.getSupplierCagetoryBySupplier(conn, supplier);
+        SupplierCategory.printMany(sc_supplier);
+        SupplierCategory.getMenu(conn);
+        break;
+      case 2:
+        String category;
+        System.out.print("> ");
+        category = scanner.next();
+        ArrayList<SupplierCategory> sc_category = SupplierCategory.getSupplierCagetoryByCategory(conn, category);
+        SupplierCategory.printMany(sc_category);
+        SupplierCategory.getMenu(conn);
+        break;
+      case 3:
+        ArrayList<SupplierCategory> sc_all = SupplierCategory.getAll(conn);
+        SupplierCategory.printMany(sc_all);
+        SupplierCategory.getMenu(conn);
+        break;
+      case 8:
+        break;
+      default:
+        SupplierCategory.getMenu(conn);
+        break;
+    }
+  }
+
+  public static void removeMenu(Connection conn){
+    String supplier_id;
+    String category_id;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Supplier ID");
+    System.out.print("> ");
+    supplier_id = scanner.next();
+
+    System.out.println("Category ID");
+    System.out.print("> ");
+    category_id = scanner.next();
+
+    Supplies input = new Supplies(supplier_id, category_id);
+    Supplies.removeSupplies((conn), input);
   }
 }
