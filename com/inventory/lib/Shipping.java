@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.util.UUID;
 
@@ -39,6 +40,18 @@ public class Shipping {
   public void setAddress(String address) {
     this.address = address;
   }
+
+  public void print() {
+    System.out.println("ID:\t" + this.getId());
+    System.out.println("Address:\t" + this.getAddress());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<Shipping> sh) {
+    System.out.println("*** Shipping ***");
+    sh.forEach(shipping -> shipping.print());
+  }
+
 
   public static void createShipping(Connection conn, Shipping sh) {
     try {
@@ -120,4 +133,120 @@ public class Shipping {
     }
     return null;
   }
+
+  public static void menu(Connection conn) {
+    System.out.println("*** Shipping Menu *** \n");
+    System.out.println("1 - CREATE");
+    System.out.println("2 - GET");
+    System.out.println("3 - UPDATE");
+    System.out.println("4 - REMOVE");
+    System.out.println("8 - BACK\n");
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("> ");
+
+    int option = scanner.nextInt();
+    switch (option) {
+      case 1:
+        Shipping.createMenu(conn);
+        Shipping.menu(conn);
+        break;
+      case 2:
+        Shipping.getMenu(conn);
+        Shipping.menu(conn);
+        break;
+      case 3:
+        Shipping.updateMenu(conn);
+        Shipping.menu(conn);
+        break;
+      case 4:
+        Shipping.removeMenu(conn);
+        Shipping.menu(conn);
+      case 8:
+        break;
+      default: 
+        Shipping.menu(conn);
+        break;
+    }
+  }
+
+  public static void createMenu(Connection conn) {
+    String address;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Address");
+    System.out.print("> ");
+    address = scanner.next();
+
+    Shipping input = new Shipping(address);
+    Shipping.createShipping(conn, input);
+  }
+
+  public static void getMenu(Connection conn) {
+    System.out.println("*** Get Shipping ***");
+    System.out.println("1 - BY ID");
+    System.out.println("2 - ALL");
+    System.out.println("8 - BACK");
+
+    int option;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("> ");
+    option = scanner.nextInt();
+
+    switch(option) {
+      case 1:
+        String id;
+   
+        System.out.println("ID");
+        System.out.print("> ");
+        id = scanner.next();
+    
+        Shipping.getShipping(conn, id);
+        Shipping.getMenu(conn);
+        break;
+      case 2:
+        ArrayList<Shipping> shippings = Shipping.getAll(conn);
+        Shipping.printMany(shippings);
+        Shipping.getMenu(conn);
+        break;
+      case 8:
+        break;
+      default:
+        Shipping.getMenu(conn);
+    }
+  }
+
+  public static void updateMenu(Connection conn) {
+    String id;
+    String input;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("ID");
+    System.out.print("> ");
+    id = scanner.next();
+
+    Shipping shipping = Shipping.getShipping(conn, id);
+
+    System.out.println("# -> Don't update\n");
+    System.out.println("Address");
+    System.out.print("> ");
+    input = scanner.next();
+    if (input != "#") {
+      shipping.setAddress(input);
+    }
+    Shipping.updateShipping(conn, shipping);
+  }
+
+  public static void removeMenu(Connection conn){
+    String id;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("ID");
+    System.out.print("> ");
+    id = scanner.next();
+
+    Shipping.removeShipping(conn, id);
+  }
+
 }

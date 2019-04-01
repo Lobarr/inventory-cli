@@ -1,12 +1,6 @@
 import com.inventory.lib.utils.DB;
 import com.inventory.cli.Menu;
 
-
-enum test {
-  A,
-  B,
-  C
-}
 class Main {
   public static void main(String args[]) {
     var db = new DB();

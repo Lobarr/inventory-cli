@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 
 public class ProductBrand {
@@ -31,6 +32,17 @@ public class ProductBrand {
 
   public void setBrand_id(String brand_id) {
     this.brand_id = brand_id;
+  }
+
+  public void print() {
+    System.out.println("Product ID:\t" + this.getProduct_id());
+    System.out.println("Brand ID:\t" + this.getBrand_id());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<ProductBrand> pb) {
+    System.out.println("*** ProductBrands ***");
+    pb.forEach(productBrand -> productBrand.print());
   }
 
   public static void createProductBrand(Connection conn, ProductBrand pb) {
@@ -101,5 +113,82 @@ public class ProductBrand {
       System.out.println("Reason: " + e.getMessage());    
     }
     return null;
+  }
+
+  public static void menu(Connection conn) {
+    System.out.println("*** ProductBrand Menu *** \n");
+    System.out.println("1 - CREATE");
+    System.out.println("2 - GET");
+    System.out.println("3 - REMOVE");
+    System.out.println("8 - BACK\n");
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("> ");
+
+    int option = scanner.nextInt();
+    switch (option) {
+      case 1:
+        ProductBrand.createMenu(conn);
+        ProductBrand.menu(conn);
+        break;
+      case 2:
+        ProductBrand.getMenu(conn);
+        ProductBrand.menu(conn);
+        break;
+      case 3:
+        ProductBrand.removeMenu(conn);
+        ProductBrand.menu(conn);
+      case 8:
+        break;
+      default: 
+        ProductBrand.menu(conn);
+        break;
+    }
+  }
+
+  public static void createMenu(Connection conn) {
+    String product;
+    String brand;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Product ID");
+    System.out.print("> ");
+    product = scanner.next();
+
+    System.out.println("Brand ID");
+    System.out.print("> ");
+    brand = scanner.next();
+
+    ProductBrand input = new ProductBrand(product, brand);
+    ProductBrand.createProductBrand(conn, input);
+  }
+
+  public static void getMenu(Connection conn) {
+    String brand;
+    Scanner scanner = new Scanner(System.in);
+    
+    System.out.println("*** Get ProductBrand ***");
+    System.out.print("> ");
+    brand = scanner.next();
+
+    ArrayList<Product> po = ProductBrand.getBrandProducts(conn, brand);
+    Product.printMany(po);
+  }
+
+  public static void removeMenu(Connection conn){
+    String product;
+    String brand;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Product ID");
+    System.out.print("> ");
+    product = scanner.next();
+
+    System.out.println("Brand ID");
+    System.out.print("> ");
+    brand = scanner.next();
+
+    ProductBrand input = new ProductBrand(product, brand);
+    ProductBrand.removeProductBrand(conn, input);
   }
 }

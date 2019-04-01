@@ -5,7 +5,8 @@
       "name": "CodeLens (Launch) - Main",
       "request": "launch",
       "mainClass": "Main",
-      "classPaths": [".:./deps/sqlite-jdbc-3.27.2.1.jar"]
+      "classPaths": [".:./deps/sqlite-jdbc-3.27.2.1.jar"],
+      "console": "integratedTerminal",
     }
   ]
 }

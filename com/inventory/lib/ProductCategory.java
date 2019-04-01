@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 
 public class ProductCategory {
@@ -32,6 +33,17 @@ public class ProductCategory {
 
   public void setCategory_id(String category_id) {
     this.category_id = category_id;
+  }
+
+  public void print() {
+    System.out.println("Product ID:\t" + this.getProduct_id());
+    System.out.println("Category ID:\t" + this.getCategory_id());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<ProductCategory> pc) {
+    System.out.println("*** ProductCategory ***");
+    pc.forEach(productCategory -> productCategory.print());
   }
 
   public static void createProductCategory(Connection conn, ProductCategory pc) {
@@ -125,5 +137,115 @@ public class ProductCategory {
       System.out.println("Reason: " + e.getMessage());    
     }
     return null;
+  }
+
+  public static void menu(Connection conn) {
+    System.out.println("*** ProductCategory Menu *** \n");
+    System.out.println("1 - CREATE");
+    System.out.println("2 - GET");
+    System.out.println("3 - REMOVE");
+    System.out.println("8 - BACK\n");
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("> ");
+
+    int option = scanner.nextInt();
+    switch (option) {
+      case 1:
+        ProductCategory.createMenu(conn);
+        ProductCategory.menu(conn);
+        break;
+      case 2:
+        ProductCategory.getMenu(conn);
+        ProductCategory.menu(conn);
+        break;
+      case 3:
+        ProductCategory.removeMenu(conn);
+        ProductCategory.menu(conn);
+      case 8:
+        break;
+      default: 
+        ProductCategory.menu(conn);
+        break;
+    }
+  }
+
+  public static void createMenu(Connection conn) {
+    String product;
+    String category;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Product ID");
+    System.out.print("> ");
+    product = scanner.next();
+
+    System.out.println("Category ID");
+    System.out.print("> ");
+    category = scanner.next();
+
+    ProductCategory input = new ProductCategory(product, category);
+    ProductCategory.createProductCategory(conn, input);
+  }
+
+  public static void getMenu(Connection conn) {
+    System.out.println("*** Get ProductCategory ***");
+    System.out.println("1 - CATEGORY PRODUCTS");
+    System.out.println("2 - PRODUCT CATEGORIES");
+    System.out.println("3 - ALL");
+    System.out.println("8 - BACK");
+
+    int option;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("> ");
+    option = scanner.nextInt();
+
+    switch(option) {
+      case 1:
+        System.out.println("Category ID");
+        System.out.print("> ");
+        String category = scanner.next();
+
+        ArrayList<Product> category_products = ProductCategory.getCategoryProducts(conn, category);
+        Product.printMany(category_products);
+        ProductCategory.getMenu(conn);
+        break;
+      case 2:
+        System.out.println("Product ID");
+        System.out.print("> ");
+        String product = scanner.next();
+
+        ArrayList<Category> product_categories = ProductCategory.getProductCategories(conn, category);
+        Category.printMany(product_categories);
+        ProductCategory.getMenu(conn);
+        break;
+      case 3:
+        ArrayList<ProductCategory> pc = ProductCategory.getAll(conn);
+        ProductCategory.printMany(pc);
+        ProductCategory.getMenu(conn);
+        break;
+      case 8:
+        break;
+      default:
+        ProductCategory.getMenu(conn);
+    }
+  }
+
+  public static void removeMenu(Connection conn){
+    String product;
+    String category;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Product ID");
+    System.out.print("> ");
+    product = scanner.next();
+
+    System.out.println("Category ID");
+    System.out.print("> ");
+    category = scanner.next();
+
+    ProductCategory input = new ProductCategory(product, category);
+
+    ProductCategory.removeProductCategory(conn, input);
   }
 }

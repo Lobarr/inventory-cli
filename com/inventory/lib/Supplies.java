@@ -7,18 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
-// public enum SuppliesOptions {
-//   CREATE,
-//   GET,
-//   REMOVE
-// }
-
-// public enum SuppliesGetOptions {
-//   ALL,
-//   BYSUPPLIER,
-//   BYPRODUCT,
-// }
-
 public class Supplies {
   private String supplier_id;
   private String product_id;
@@ -203,7 +191,7 @@ public class Supplies {
     int option;
     Scanner scanner = new Scanner(System.in);
 
-    System.out.print(">");
+    System.out.print("> ");
     option = scanner.nextInt();
 
     switch(option){
@@ -250,6 +238,6 @@ public class Supplies {
     product_id = scanner.next();
 
     Supplies input = new Supplies(supplier_id, product_id);
-    Supplies.removeSupplies((conn), input);
+    Supplies.removeSupplies(conn, input);
   }
 }

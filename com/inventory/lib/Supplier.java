@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.util.UUID;
 
@@ -49,6 +50,18 @@ public class Supplier {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public void print() {
+    System.out.println("ID:\t" + this.getId());
+    System.out.println("Name:\t" + this.getName());
+    System.out.println("Email:\t" + this.getEmail());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<Supplier> suppliers) {
+    System.out.println("*** Suppliers ***");
+    suppliers.forEach(supplier -> supplier.print());
   }
 
   public static void createSupplier(Connection conn, Supplier su) {
@@ -134,4 +147,132 @@ public class Supplier {
     }
     return null;
   }
+
+  public static void menu(Connection conn) {
+    System.out.println("*** Supplier Menu *** \n");
+    System.out.println("1 - CREATE");
+    System.out.println("2 - GET");
+    System.out.println("3 - UPDATE");
+    System.out.println("4 - REMOVE");
+    System.out.println("8 - BACK\n");
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("> ");
+
+    int option = scanner.nextInt();
+    switch (option) {
+      case 1:
+        Supplier.createMenu(conn);
+        Supplier.menu(conn);
+        break;
+      case 2:
+        Supplier.getMenu(conn);
+        Supplier.menu(conn);
+        break;
+      case 3:
+        Supplier.updateMenu(conn);
+        Supplier.menu(conn);
+        break;
+      case 4:
+        Supplier.removeMenu(conn);
+        Supplier.menu(conn);
+      case 8:
+        break;
+      default: 
+        Supplier.menu(conn);
+        break;
+    }
+  }
+
+  public static void createMenu(Connection conn) {
+    String name;
+    String email;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Name");
+    System.out.print("> ");
+    name = scanner.next();
+
+    System.out.println("Email");
+    System.out.print("> ");
+    email = scanner.next();
+
+    Supplier input = new Supplier(name, email);
+    Supplier.createSupplier(conn, input);
+  }
+
+  public static void getMenu(Connection conn) {
+    System.out.println("*** Get Supplier ***");
+    System.out.println("1 - BY ID");
+    System.out.println("2 - ALL");
+    System.out.println("8 - BACK");
+
+    int option;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("> ");
+    option = scanner.nextInt();
+
+    switch(option) {
+      case 1:
+        String id;
+   
+        System.out.println("ID");
+        System.out.print("> ");
+        id = scanner.next();
+    
+        Supplier.getSupplier(conn, id);
+        Supplier.getMenu(conn);
+        break;
+      case 2:
+        ArrayList<Supplier> suppliers = Supplier.getAll(conn);
+        Supplier.printMany(suppliers);
+        Supplier.getMenu(conn);
+        break;
+      case 8:
+        break;
+      default:
+        Supplier.getMenu(conn);
+    }
+  }
+
+  public static void updateMenu(Connection conn) {
+    String id;
+    String input;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("ID");
+    System.out.print("> ");
+    id = scanner.next();
+
+    Supplier supplier = Supplier.getSupplier(conn, id);
+
+    System.out.println("# -> Don't update\n");
+    System.out.println("Name");
+    System.out.print("> ");
+    input = scanner.next();
+    if (input != "#") {
+      supplier.setName(input);
+    }
+
+    System.out.println("Email");
+    System.out.print("> ");
+    input = scanner.next();
+    if (input != "#") {
+      supplier.setEmail(input);
+    }
+    Supplier.updateSupplier(conn, supplier);
+  }
+
+  public static void removeMenu(Connection conn){
+    String id;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("ID");
+    System.out.print("> ");
+    id = scanner.next();
+
+    Supplier.removeSupplier(conn, id);
+  }
+
 }
