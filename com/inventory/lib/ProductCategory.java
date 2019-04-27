@@ -150,6 +150,7 @@ public class ProductCategory {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         ProductCategory.createMenu(conn);
@@ -182,6 +183,7 @@ public class ProductCategory {
     System.out.println("Category ID");
     System.out.print("> ");
     category = scanner.next();
+    scanner.close();
 
     ProductCategory input = new ProductCategory(product, category);
     ProductCategory.createProductCategory(conn, input);
@@ -215,7 +217,7 @@ public class ProductCategory {
         System.out.print("> ");
         String product = scanner.next();
 
-        ArrayList<Category> product_categories = ProductCategory.getProductCategories(conn, category);
+        ArrayList<Category> product_categories = ProductCategory.getProductCategories(conn, product);
         Category.printMany(product_categories);
         ProductCategory.getMenu(conn);
         break;
@@ -243,6 +245,8 @@ public class ProductCategory {
     System.out.println("Category ID");
     System.out.print("> ");
     category = scanner.next();
+
+    scanner.close();
 
     ProductCategory input = new ProductCategory(product, category);
 

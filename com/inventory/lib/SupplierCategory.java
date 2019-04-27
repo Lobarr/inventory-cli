@@ -146,6 +146,7 @@ public class SupplierCategory {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         SupplierCategory.createMenu(conn);
@@ -178,6 +179,7 @@ public class SupplierCategory {
     System.out.println("Category ID");
     System.out.print("> ");
     category_id = scanner.next();
+    scanner.close();
 
     SupplierCategory input = new SupplierCategory(supplier_id, category_id);
     SupplierCategory.createSupplierCategory(conn, input);
@@ -224,6 +226,7 @@ public class SupplierCategory {
         SupplierCategory.getMenu(conn);
         break;
     }
+    scanner.close();
   }
 
   public static void removeMenu(Connection conn){
@@ -238,6 +241,7 @@ public class SupplierCategory {
     System.out.println("Category ID");
     System.out.print("> ");
     category_id = scanner.next();
+    scanner.close();
 
     Supplies input = new Supplies(supplier_id, category_id);
     Supplies.removeSupplies((conn), input);

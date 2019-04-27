@@ -126,6 +126,7 @@ public class ProductBrand {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         ProductBrand.createMenu(conn);
@@ -158,6 +159,7 @@ public class ProductBrand {
     System.out.println("Brand ID");
     System.out.print("> ");
     brand = scanner.next();
+    scanner.close();
 
     ProductBrand input = new ProductBrand(product, brand);
     ProductBrand.createProductBrand(conn, input);
@@ -170,6 +172,7 @@ public class ProductBrand {
     System.out.println("*** Get ProductBrand ***");
     System.out.print("> ");
     brand = scanner.next();
+    scanner.close();
 
     ArrayList<Product> po = ProductBrand.getBrandProducts(conn, brand);
     Product.printMany(po);
@@ -187,6 +190,7 @@ public class ProductBrand {
     System.out.println("Brand ID");
     System.out.print("> ");
     brand = scanner.next();
+    scanner.close();
 
     ProductBrand input = new ProductBrand(product, brand);
     ProductBrand.removeProductBrand(conn, input);

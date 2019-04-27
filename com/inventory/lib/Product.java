@@ -172,6 +172,7 @@ public class Product {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         Product.createMenu(conn);
@@ -215,6 +216,8 @@ public class Product {
     System.out.print("> ");
     price = scanner.nextFloat();
 
+    scanner.close();
+
     Product input = new Product(name, stock, price);
     Product.createProduct(conn, input);
   }
@@ -252,6 +255,7 @@ public class Product {
       default:
         Supplier.getMenu(conn);
     }
+    scanner.close();
   }
 
   public static void updateMenu(Connection conn) {
@@ -290,7 +294,7 @@ public class Product {
     if (input_flt != -1) {
       product.setPrice(input_flt);
     }
-
+    scanner.close();
     Product.updateProduct(conn, product);
   }
 
@@ -301,7 +305,7 @@ public class Product {
     System.out.println("ID");
     System.out.print("> ");
     id = scanner.next();
-
+    scanner.close();
     Product.removeProduct(conn, id);
   }
 }

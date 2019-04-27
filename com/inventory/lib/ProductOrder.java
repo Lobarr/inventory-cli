@@ -162,6 +162,7 @@ public class ProductOrder {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         ProductOrder.createMenu(conn);
@@ -199,6 +200,7 @@ public class ProductOrder {
     System.out.println("Stock");
     System.out.print("> ");
     stock = scanner.nextInt();
+    scanner.close();
 
     ProductOrder input = new ProductOrder(product_id, supplier_id, stock);
     ProductOrder.createProductOrder(conn, input);
@@ -216,6 +218,7 @@ public class ProductOrder {
 
     System.out.print("> ");
     option = scanner.nextInt();
+    scanner.close();
 
     switch(option){
       case 1:
@@ -259,6 +262,7 @@ public class ProductOrder {
     System.out.println("Product ID");
     System.out.print("> ");
     product_id = scanner.next();
+    scanner.close();
 
     ProductOrder input = new ProductOrder(product_id, supplier_id);
     ProductOrder.removeProductOrder(conn, input);

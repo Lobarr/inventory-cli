@@ -146,6 +146,7 @@ public class Shipping {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         Shipping.createMenu(conn);
@@ -177,6 +178,7 @@ public class Shipping {
     System.out.println("Address");
     System.out.print("> ");
     address = scanner.next();
+    scanner.close();
 
     Shipping input = new Shipping(address);
     Shipping.createShipping(conn, input);
@@ -193,6 +195,7 @@ public class Shipping {
 
     System.out.println("> ");
     option = scanner.nextInt();
+    scanner.close();
 
     switch(option) {
       case 1:
@@ -232,6 +235,7 @@ public class Shipping {
     System.out.println("Address");
     System.out.print("> ");
     input = scanner.next();
+    scanner.close();
     if (input != "#") {
       shipping.setAddress(input);
     }
@@ -245,6 +249,7 @@ public class Shipping {
     System.out.println("ID");
     System.out.print("> ");
     id = scanner.next();
+    scanner.close();
 
     Shipping.removeShipping(conn, id);
   }

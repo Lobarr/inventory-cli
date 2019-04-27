@@ -119,4 +119,15 @@ public class Category {
     }
     return null;
   }
+
+  public void print() {
+    System.out.println("ID:\t" + this.getId());
+    System.out.println("Name:\t" + this.getName());
+    System.out.println();
+  }
+
+  public static void printMany(ArrayList<Category> categories) {
+    System.out.println("*** Categories ***");
+    categories.forEach(category -> category.print());
+  }
 }

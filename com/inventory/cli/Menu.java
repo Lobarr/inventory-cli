@@ -19,6 +19,7 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     System.out.print("> ");
     option = scanner.nextInt();
+    scanner.close();
 
     switch(option){
       case 1:

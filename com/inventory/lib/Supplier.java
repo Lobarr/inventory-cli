@@ -160,6 +160,7 @@ public class Supplier {
     System.out.print("> ");
 
     int option = scanner.nextInt();
+    scanner.close();
     switch (option) {
       case 1:
         Supplier.createMenu(conn);
@@ -196,6 +197,7 @@ public class Supplier {
     System.out.println("Email");
     System.out.print("> ");
     email = scanner.next();
+    scanner.close();
 
     Supplier input = new Supplier(name, email);
     Supplier.createSupplier(conn, input);
@@ -212,6 +214,7 @@ public class Supplier {
 
     System.out.println("> ");
     option = scanner.nextInt();
+    scanner.close();
 
     switch(option) {
       case 1:
@@ -261,6 +264,7 @@ public class Supplier {
     if (input != "#") {
       supplier.setEmail(input);
     }
+    scanner.close();
     Supplier.updateSupplier(conn, supplier);
   }
 
@@ -271,6 +275,7 @@ public class Supplier {
     System.out.println("ID");
     System.out.print("> ");
     id = scanner.next();
+    scanner.close();
 
     Supplier.removeSupplier(conn, id);
   }
